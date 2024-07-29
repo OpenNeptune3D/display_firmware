@@ -1,20 +1,36 @@
 #!/bin/bash
 
-echo "Updating screen firmware"
+echo "Updating display firmware"
 echo " "
 echo "DO NOT power off the machine! This may take a while."
 #update screen firmware
-#Install Dependencies
-
 # Create and activate a Python virtual environment
+#stopping display service
+echo "Stopping display service"
+sudo service display stop
+echo " "
+echo "Stopped display service"
+#venv
+echo " "
 echo "Creating and activating a virtual environment..."
-python3 -m venv Screen-Update
-source Screen-Update/bin/activate
+python3 -m venv Display-Update
+source Display-Update/bin/activate
 pip install pyserial
+echo " "
+echo "Activated virtual enviroment successfully"
 #Download Screen Image
-curl -O https://raw.githubusercontent.com/Choccy-vr/OpenNept4une/main/screen-config/elegoo_neptune_pro_klipper.tft
+echo " "
+echo "Downlaoding Screen Firmware"
+curl -O "${HOME}/display_firmware/tft" https://raw.githubusercontent.com/OpenNeptune3D/display_firmware/main/tft/OpenNeptuneUi.tft
 #Flashing
 echo " "
-echo "Done downlaoding tft file & dependencies. Onto flashing!"
+echo "Starting to flash!"
 echo " "
-python3 "${HOME}/OpenNept4une/screen-config/Nexus.py" -i elegoo_neptune_pro_klipper.tft -u 115200
+python3 "${HOME}/display_firmware/Nexus.py" -i "${HOME}/display_firmware/tft/OpenNeptuneUi.tft" -u 115200 -p /dev/ttyS1
+echo " "
+#Modify scripts
+echo "Making necessary modifications"
+curl -O "${HOME}/display_connector/src" https://raw.githubusercontent.com/OpenNeptune3D/display_firmware/main/Modified_Scripts/response_actions.py
+echo " "
+echo " Updated display firmware succesfully. Restarting"
+sudo reboot
