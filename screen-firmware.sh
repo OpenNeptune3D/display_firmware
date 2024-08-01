@@ -30,9 +30,9 @@ python3 "${HOME}/display_firmware/Nexus.py" -i "${HOME}/display_firmware/tft/Ope
 echo " "
 #Modify scripts
 echo "Making necessary modifications"
-curl -O "${HOME}/display_connector/src" https://raw.githubusercontent.com/OpenNeptune3D/display_firmware/main/Modified_Scripts/response_actions.py
-curl -O "${HOME}/display_connector/src" https://raw.githubusercontent.com/OpenNeptune3D/display_firmware/main/Modified_Scripts/neptune4.py
-curl -O "${HOME}/display_connector/src" https://raw.githubusercontent.com/OpenNeptune3D/display_firmware/main/Modified_Scripts/openneptune_display.py
+curl -O "${HOME}/display_connector/src" https://github.com/OpenNeptune3D/display_firmware/raw/main/Modified_Scripts/response_actions.py
+curl -O "${HOME}/display_connector/src" https://github.com/OpenNeptune3D/display_firmware/raw/main/Modified_Scripts/neptune4.py
+curl -O "${HOME}/display_connector/src" https://github.com/OpenNeptune3D/display_firmware/raw/main/Modified_Scripts/openneptune_display.py
 echo " "
 echo " Updated display firmware succesfully. Restarting"
 sudo reboot

@@ -133,7 +133,7 @@ update_repo() {
             moonraker_update_manager "display"
         fi
     fi
-    if [ -d "$DISPLAY_FIRMWARE_DIR" ]
+    if [ -d "$DISPLAY_FIRMWARE_DIR" ]; then
         process_repo_update "$DISPLAY_FIRMWARE_DIR" "Display Firmware"
         #moonraker_update_manager "display_firmware"
     fi
