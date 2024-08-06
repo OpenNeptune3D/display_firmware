@@ -17,11 +17,11 @@ python3 -m venv Display-Update
 source Display-Update/bin/activate
 pip install pyserial
 echo " "
-echo "Activated virtual enviroment successfully"
+echo "Activated virtual environment successfully"
 #Download Screen Image
 echo " "
-echo "Downlaoding Screen Firmware"
-curl -o "${HOME}/display_firmware/tft" https://raw.githubusercontent.com/OpenNeptune3D/display_firmware/main/tft/OpenNeptuneUi.tft
+echo "Downloading Screen Firmware"
+curl -o "${HOME}/display_firmware/tft/OpenNeptuneUi.tft" https://raw.githubusercontent.com/OpenNeptune3D/display_firmware/main/tft/OpenNeptuneUi.tft
 #Flashing
 echo " "
 echo "Starting to flash!"
@@ -30,9 +30,9 @@ python3 "${HOME}/display_firmware/Nexus.py" -i "${HOME}/display_firmware/tft/Ope
 echo " "
 #Modify scripts
 echo "Making necessary modifications"
-curl -o "${HOME}/display_connector/src" https://raw.githubusercontent.com/OpenNeptune3D/display_firmware/main/Modified_Scripts/response_actions.py
-curl -o "${HOME}/display_connector/src" https://raw.githubusercontent.com/OpenNeptune3D/display_firmware/main/Modified_Scripts/neptune4.py
-curl -o "${HOME}/display_connector/src" https://raw.githubusercontent.com/OpenNeptune3D/display_firmware/main/Modified_Scripts/openneptune_display.py
+curl -o "${HOME}/display_connector/src/response_actions.py" https://raw.githubusercontent.com/OpenNeptune3D/display_firmware/main/Modified_Scripts/response_actions.py
+curl -o "${HOME}/display_connector/src/neptune4.py" https://raw.githubusercontent.com/OpenNeptune3D/display_firmware/main/Modified_Scripts/neptune4.py
+curl -o "${HOME}/display_connector/src/openneptune_display.py" https://raw.githubusercontent.com/OpenNeptune3D/display_firmware/main/Modified_Scripts/openneptune_display.py
 echo " "
-echo " Updated display firmware succesfully. Restarting"
+echo " Updated display firmware successfully. Restarting"
 sudo reboot
