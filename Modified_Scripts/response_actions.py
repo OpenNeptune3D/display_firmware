@@ -106,7 +106,6 @@ response_actions = {
         4: "page " + PAGE_PRINTING_EMERGENCY_STOP,
         5: "page " + PAGE_PRINTING_DIALOG_FLOW,
         6: "page " + PAGE_PRINTING_DIALOG_SPEED,
-        7: "page " + Page_
     },
     # Print Completed
     24: {
