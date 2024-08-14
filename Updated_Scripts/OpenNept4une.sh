@@ -294,12 +294,13 @@ install_feature() {
     if [[ $user_input =~ ^[Yy]$ || -z $user_input || $auto_yes = "true" ]]; then
         echo -e "Running $feature_name Installer...\n"
 
-        if [$feature_name == "Updated Display Firmware"]; then
+        if [ "$feature_name" = "Updated Display Firmware" ]; then
             if [ -d "${HOME}/display_firmware" ]; then
                 echo "Display_Firmware installed. Proceeding with installer!"
             else
                 echo "Display_Firmware not installed. Downloading"
-                git clone https://github.com/OpenNeptune3D/display_firmware.git "${HOME}"
+                mkdir display_firmware
+                git clone https://github.com/OpenNeptune3D/display_firmware.git "${HOME}/display_firmware"
             fi
         fi
 
