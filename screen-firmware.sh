@@ -13,11 +13,11 @@ echo "Stopped display service"
 
 #Make sure display_connector is on dev
 DISPLAY_CONNECTOR_DIR="${HOME}/display_connector"
-current_branch=$(git rev-parse --abbrev-ref HEAD)
+current_branch=$(git --git-dir="$DISPLAY_CONNECTOR_DIR/.git" --work-tree="$DISPLAY_CONNECTOR_DIR" rev-parse --abbrev-ref HEAD)
 if [ "$current_branch" = "main" ]; then
     echo "You are on the main branch. Switching to dev."
-    local branch_name="dev"
-    local repo_dir="DISPLAY_CONNECTOR_DIR"
+    branch_name="dev"
+    repo_dir="DISPLAY_CONNECTOR_DIR"
     if [ -d "$repo_dir" ]; then
         git -C "$repo_dir" reset --hard >/dev/null 2>&1
         git -C "$repo_dir" clean -fd >/dev/null 2>&1
