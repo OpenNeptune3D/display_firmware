@@ -141,30 +141,16 @@ class OpenNeptuneDisplayMapper(Mapper):
                         MappingLeaf(
                             [build_accessor(self.map_page(PAGE_MAIN), "x_pos")]
                         ),
-                        MappingLeaf(
-                            [build_accessor(self.map_page(PAGE_PRINTING), "x_pos")],
-                            formatter=lambda x: f"X[{x:3.2f}]",
-                        ),
                     ],
                     1: [
                         MappingLeaf(
                             [build_accessor(self.map_page(PAGE_MAIN), "y_pos")]
-                        ),
-                        MappingLeaf(
-                            [build_accessor(self.map_page(PAGE_PRINTING), "y_pos")],
-                            formatter=lambda y: f"Y[{y:3.2f}]",
                         ),
                     ],
                     2: [
                         MappingLeaf([build_accessor(self.map_page(PAGE_MAIN), "z_pos")])
                     ],
                 },
-                "live_velocity": [
-                    MappingLeaf(
-                        [build_accessor(self.map_page(PAGE_PRINTING), "pressure_val")],
-                        formatter=lambda x: f"{x:3.2f}mm/s",
-                    )
-                ],
             },
             "print_stats": {
                 "print_duration": [
