@@ -159,9 +159,9 @@ class ElegooNeptune4DisplayCommunicator(ElegooDisplayCommunicator):
                 f"{self.mapper.map_page(PAGE_MAIN)}.disp_q5.val=1"
             )  # N4Pro Outer Bed Symbol (Bottom Rig>
         elif self.model == MODEL_N4_PLUS:
-            model_image_key = "313"
+            model_image_key = "234"
         elif self.model == MODEL_N4_MAX:
-            model_image_key = "314"
+            model_image_key = "235"
 
         if self.display_name_override is None:
             await self.write(
