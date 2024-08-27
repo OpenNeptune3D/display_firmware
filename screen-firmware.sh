@@ -53,7 +53,9 @@ curl -o "${HOME}/display_connector/src/openneptune_display.py" https://raw.githu
 #modify display_connector.cfg
 config_file="${HOME}/printer_data/config/display_connector.cfg"
 new_line="display_type = openneptune"
-sed -i "/\[general\]/a $new_line" "$config_file"
+if ! grep -Fxq "$new_line" "$config_file"; then
+    sed -i "/\[general\]/a $new_line" "$config_file"
+fi
 #done
 echo " "
 echo " Updated display firmware successfully. Restarting"
