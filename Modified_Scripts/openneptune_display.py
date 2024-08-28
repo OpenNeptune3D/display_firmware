@@ -350,6 +350,8 @@ class OpenNeptuneDisplayCommunicator(ElegooDisplayCommunicator):
             await self.write("printvalue.xcen=0")
             await self.write("move printvalue,13,267,13,267,0,10")
             await self.write("vis b[16],0")
+            if self.has_two_beds:
+                await self.write("vis out_bedtemp,1")
         elif current_page == PAGE_PRINTING_COMPLETE:
             await self.write('b[4].txt="Print Completed!"')
         elif current_page == PAGE_PRINTING_ADJUST:
