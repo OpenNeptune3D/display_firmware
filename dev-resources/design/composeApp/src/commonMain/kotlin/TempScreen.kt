@@ -91,11 +91,10 @@ fun TempDisplay(icon: Painter) {
                 .width(60.dp)
         ) {}
         Text("", modifier = Modifier.height(20.dp))
-        Image(
+        Icon(
             icon,
-            null,
-            modifier = Modifier.size(32.dp),
-            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface)
+            MaterialTheme.colorScheme.onSurface,
+            32.dp
         )
     }
 }

@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import openneptune.composeapp.generated.resources.Res
@@ -15,6 +16,10 @@ import org.jetbrains.skia.Drawable
 
 @Composable
 fun Icon(drawable: DrawableResource, color: Color, size: Dp) {
-    Image(
-        painterResource(drawable), null, modifier = Modifier.size(size), colorFilter = ColorFilter.tint(color))
+    Icon(painterResource(drawable), color, size)
+}
+
+@Composable
+fun Icon(painter: Painter, color: Color, size: Dp) {
+    Image(painter, null, modifier = Modifier.size(size), colorFilter = ColorFilter.tint(color))
 }

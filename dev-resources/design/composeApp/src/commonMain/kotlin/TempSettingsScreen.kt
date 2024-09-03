@@ -123,7 +123,7 @@ fun TempSettingsScreen(showSecondHotbed: Boolean, buttonState: String = "") {
                 } else {
                     MaterialTheme.colorScheme.surface
                 }
-                MultiChoiceSegmentedButtonRow {
+                MultiChoiceSegmentedButtonRow(modifier = Modifier.fillMaxWidth()) {
                     SegmentedButton(
                         buttonState == "active",
                         {},
@@ -133,7 +133,7 @@ fun TempSettingsScreen(showSecondHotbed: Boolean, buttonState: String = "") {
                             activeBorderColor = MaterialTheme.colorScheme.primary,
                             inactiveBorderColor = MaterialTheme.colorScheme.primary,
                             activeContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                            activeContentColor = MaterialTheme.colorScheme.onPrimary,
+                            activeContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
                             inactiveContainerColor = backgroundColor
                         )
                     ) {
@@ -147,7 +147,7 @@ fun TempSettingsScreen(showSecondHotbed: Boolean, buttonState: String = "") {
                             activeBorderColor = MaterialTheme.colorScheme.primary,
                             inactiveBorderColor = MaterialTheme.colorScheme.primary,
                             activeContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                            activeContentColor = MaterialTheme.colorScheme.onPrimary,
+                            activeContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
                             inactiveContainerColor = backgroundColor
                         )
                     ) {
@@ -161,7 +161,7 @@ fun TempSettingsScreen(showSecondHotbed: Boolean, buttonState: String = "") {
                             activeBorderColor = MaterialTheme.colorScheme.primary,
                             inactiveBorderColor = MaterialTheme.colorScheme.primary,
                             activeContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                            activeContentColor = MaterialTheme.colorScheme.onPrimary,
+                            activeContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
                             inactiveContainerColor = backgroundColor
                         )
                     ) {
