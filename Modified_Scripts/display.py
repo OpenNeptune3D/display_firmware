@@ -1158,7 +1158,7 @@ class DisplayController:
                 current_page = self._get_current_page()
 
                 if state in ["printing", "paused"]:
-                    await self.display.update_printing_state_ui(state)
+                    #await self.display.update_printing_state_ui(state)
                     if current_page is None or current_page not in PRINTING_PAGES:
                         self._navigate_to_page(PAGE_PRINTING, clear_history=True)
                 elif state == "complete":

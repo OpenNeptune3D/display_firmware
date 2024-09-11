@@ -50,6 +50,7 @@ echo "Making necessary modifications"
 curl -o "${HOME}/display_connector/src/response_actions.py" https://raw.githubusercontent.com/OpenNeptune3D/display_firmware/main/Modified_Scripts/response_actions.py
 curl -o "${HOME}/display_connector/src/neptune4.py" https://raw.githubusercontent.com/OpenNeptune3D/display_firmware/main/Modified_Scripts/neptune4.py
 curl -o "${HOME}/display_connector/src/openneptune_display.py" https://raw.githubusercontent.com/OpenNeptune3D/display_firmware/main/Modified_Scripts/openneptune_display.py
+curl -o "${HOME}/display_connector/src/elegoo_display.py" https://raw.githubusercontent.com/OpenNeptune3D/display_firmware/main/Modified_Scripts/elegoo_display.py
 #modify display_connector.cfg
 config_file="${HOME}/printer_data/config/display_connector.cfg"
 new_line="display_type = openneptune"
