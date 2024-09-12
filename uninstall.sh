@@ -2,13 +2,14 @@
 
 echo "Uninstalling display firmware."
 
+#venv
+source Display-Update/bin/activate
 #stopping display service
 echo "Stopping display service"
 sudo service display stop
 echo " "
 echo "Stopped display service"
-#venv
-source Display-Update/bin/activate
+
 #restore scripts
 echo "Making necessary modifications"
 curl -o "${HOME}/display_connector/src/response_actions.py" https://raw.githubusercontent.com/OpenNeptune3D/display_connector/dev/src/response_actions.py
