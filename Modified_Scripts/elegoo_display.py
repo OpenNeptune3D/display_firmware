@@ -268,7 +268,7 @@ class ElegooDisplayMapper(Mapper):
                     MappingLeaf(
                         [build_accessor(self.map_page(PAGE_LIGHTS), "led1")],
                         field_type="pic",
-                        formatter=lambda x: "77" if int(x) == 1 else "76",
+                        formatter=lambda x: "ON" if int(x) == 1 else "OFF",
                     )
                 ]
             },
@@ -277,7 +277,7 @@ class ElegooDisplayMapper(Mapper):
                     MappingLeaf(
                         [build_accessor(self.map_page(PAGE_LIGHTS), "led2")],
                         field_type="pic",
-                        formatter=lambda x: "77" if int(x) == 1 else "76",
+                        formatter=lambda x: "ON" if int(x) == 1 else "OFF",
                     )
                 ]
             },
