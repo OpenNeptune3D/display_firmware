@@ -1098,7 +1098,7 @@ class DisplayController:
     def find_best_thumbnail(self, metadata):
         best_thumbnail = None
         for thumbnail in metadata["thumbnails"]:
-            if thumbnail["width"] == 160:
+            if thumbnail["width"] == 200:
                 return thumbnail
             if best_thumbnail is None or thumbnail["width"] > best_thumbnail["width"]:
                 best_thumbnail = thumbnail
@@ -1131,7 +1131,7 @@ class DisplayController:
             logger.info("Starting thumbnail parsing")
             loop = asyncio.get_running_loop()
             with ThreadPoolExecutor(max_workers=2) as pool:
-                image = await loop.run_in_executor(pool, parse_thumbnail, thumbnail, 160, 160, background)
+                image = await loop.run_in_executor(pool, parse_thumbnail, thumbnail, 200, 200, background)
             logger.info("Thumbnail parsing completed")
             return image
         except Exception as e:
