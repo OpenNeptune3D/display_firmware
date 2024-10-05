@@ -29,6 +29,7 @@ response_actions = {
         3: "page " + PAGE_SETTINGS,
         4: "page " + PAGE_LEVELING,
         5: "page " + PAGE_PREPARE_TEMP,
+        6: "page " + PAGE_LIGHTS,
     },
     # File Picker
     2: {
