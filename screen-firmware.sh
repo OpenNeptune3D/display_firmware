@@ -38,6 +38,54 @@ source Display-Update/bin/activate
 pip install pyserial
 echo " "
 echo "Activated virtual environment successfully"
+#Themes
+main_repo_url="https://github.com/Choccy-vr/display_firmware_dev.git"
+themes_path="Themes"
+
+# Step 1: Fetch the list of themes using the GitHub API
+echo "Fetching the list of available themes..."
+themes_list=$(curl -s "https://api.github.com/repos/Choccy-vr/display_firmware_dev/contents/$themes_path" | jq -r '.[] | select(.type == "dir") | .name')
+
+if [[ -z "$themes_list" ]]; then
+    echo "No themes found in the repository."
+    exit 1
+fi
+
+# Step 2: Display the list of available themes with numbering
+echo "Available Themes:"
+theme_array=()
+index=1
+for theme in $themes_list; do
+    theme_array+=("$theme")
+    echo "$index) $theme"
+    index=$((index + 1))
+done
+
+# Step 3: Prompt the user to select a theme
+echo "Enter the number of the theme you want to download:"
+read selection
+
+# Validate the selection
+if ! [[ "$selection" =~ ^[0-9]+$ ]] || ((selection < 1 || selection > ${#theme_array[@]})); then
+    echo "Invalid selection. Please choose a valid number."
+    exit 1
+fi
+
+selected_theme="${theme_array[$selection-1]}"
+theme_clone_url="$main_repo_url"
+
+# Step 4: Clone only the selected theme subdirectory using sparse-checkout
+echo "Cloning $selected_theme..."
+mkdir "$selected_theme"
+cd "$selected_theme"
+git init
+git remote add origin "$theme_clone_url"
+git config core.sparseCheckout true
+echo "$themes_path/$selected_theme" >> .git/info/sparse-checkout
+git pull origin main
+
+echo "Theme $selected_theme has been successfully downloaded."
+
 #Download Screen Image
 echo " "
 echo "Downloading Screen Firmware"
