@@ -90,28 +90,48 @@ rm -rf .git "$themes_path"
 
 echo "Theme $selected_theme has been successfully downloaded into the themes directory."
 
-#Download Screen Image
-echo " "
-echo "Downloading Screen Firmware"
-curl -o "${HOME}/display_firmware/tft/OpenNeptuneUi.tft" https://raw.githubusercontent.com/OpenNeptune3D/display_firmware/main/tft/OpenNeptuneUi.tft
-#Flashing
-echo " "
-echo "Starting to flash!"
-echo " "
-python3 "${HOME}/display_firmware/Nexus.py" -i "${HOME}/display_firmware/tft/OpenNeptuneUi.tft" -u 115200 -p /dev/ttyS1
-echo " "
 #Modify scripts
 echo "Making necessary modifications"
-curl -o "${HOME}/display_connector/src/response_actions.py" https://raw.githubusercontent.com/OpenNeptune3D/display_firmware/main/Modified_Scripts/response_actions.py
-curl -o "${HOME}/display_connector/src/neptune4.py" https://raw.githubusercontent.com/OpenNeptune3D/display_firmware/main/Modified_Scripts/neptune4.py
-curl -o "${HOME}/display_connector/src/openneptune_display.py" https://raw.githubusercontent.com/OpenNeptune3D/display_firmware/main/Modified_Scripts/openneptune_display.py
-curl -o "${HOME}/display_connector/src/elegoo_display.py" https://raw.githubusercontent.com/OpenNeptune3D/display_firmware/main/Modified_Scripts/elegoo_display.py
+# Path to the JSON file
+json_file="$themes_path/$selected_theme/Config.json"
+
+# Check if the JSON file exists
+if [[ ! -f "$json_file" ]]; then
+    echo "JSON file not found: $json_file"
+    exit 1
+fi
+
+# Loop through each script entry in the JSON file
+echo "Processing scripts from $json_file..."
+
+# Using jq to parse the JSON and iterate through each script
+for script in $(jq -c '.scripts[]' "$json_file"); do
+    source_file=$(echo "$script" | jq -r '.source')
+    destination_file=$(echo "$script" | jq -r '.destination')
+
+    # Full path to the source file
+    full_source_path="$themes_path/$selected_theme/$source_file"
+    # Full path to the destination file
+    full_destination_path="${HOME}/$destination_file"
+
+    # Copy the file and overwrite if it exists
+    cp -f "$full_source_path" "$full_destination_path"
+
+    echo "Copied $full_source_path to $full_destination_path"
+done
+
 #modify display_connector.cfg
 config_file="${HOME}/printer_data/config/display_connector.cfg"
 new_line="display_type = openneptune"
 if ! grep -Fxq "$new_line" "$config_file"; then
     sed -i "/\[general\]/a $new_line" "$config_file"
 fi
+#Flashing
+echo " "
+echo "Starting to flash!"
+echo " "
+python3 "${HOME}/display_firmware/Nexus.py" -i "${HOME}/$themes_path/$selected_theme/tft/OpenNeptuneUi.tft" -u 115200 -p /dev/ttyS1
+echo " "
 #done
 echo " "
 echo " Updated display firmware successfully. Restarting"
