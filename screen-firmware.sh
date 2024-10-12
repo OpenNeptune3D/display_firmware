@@ -75,16 +75,20 @@ selected_theme="${theme_array[$selection-1]}"
 theme_clone_url="$main_repo_url"
 
 # Step 4: Clone only the selected theme subdirectory using sparse-checkout
-echo "Cloning $selected_theme..."
-mkdir "$selected_theme"
-cd "$selected_theme"
+echo "Cloning $selected_theme into the themes directory..."
+mkdir -p "$themes_path"
+cd "$themes_path"
 git init
 git remote add origin "$theme_clone_url"
 git config core.sparseCheckout true
 echo "$themes_path/$selected_theme" >> .git/info/sparse-checkout
 git pull origin main
 
-echo "Theme $selected_theme has been successfully downloaded."
+# Move the theme to the themes directory and clean up
+mv "$themes_path/$selected_theme" ./
+rm -rf .git "$themes_path"
+
+echo "Theme $selected_theme has been successfully downloaded into the themes directory."
 
 #Download Screen Image
 echo " "
