@@ -677,6 +677,11 @@ class DisplayController:
             )
             self._go_back()
             self._loop.create_task(self._navigate_to_page(PAGE_OVERLAY_LOADING))
+        elif action == "firmware_restart":
+            logger.info("Firmware Restart")
+            self._loop.create_task(self._send_moonraker_request("printer.firmware_restart"))
+            self._go_back()
+            self._loop.create_task(self._navigate_to_page(PAGE_OVERLAY_LOADING))
 
     async def _handle_pause_resume(self):
         if self.current_state == "paused":
@@ -1170,7 +1175,7 @@ class DisplayController:
                 current_page = self._get_current_page()
 
                 if state in ["printing", "paused"]:
-#                    await self.display.update_printing_state_ui(state)
+                    await self.display.update_printing_state_ui(state)
                     if current_page is None or current_page not in PRINTING_PAGES:
                         await self._navigate_to_page(PAGE_PRINTING, clear_history=True)
                 elif state == "complete":
