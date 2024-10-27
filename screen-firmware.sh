@@ -40,7 +40,8 @@ echo " "
 echo "Activated virtual environment successfully"
 #Themes
 main_repo_url="https://github.com/Choccy-vr/display_firmware_dev.git"
-themes_path="/display_firmware_dev/Themes"
+themes_path="Themes"
+local_themes_path="${HOME}/display_firmware_dev/$themes_path"
 
 # Step 1: Fetch the list of themes using the GitHub API
 echo "Fetching the list of available themes..."
@@ -93,7 +94,7 @@ echo "Theme $selected_theme has been successfully downloaded into the themes dir
 #Modify scripts
 echo "Making necessary modifications"
 # Path to the JSON file
-json_file="/$themes_path/$selected_theme/Config.json"
+json_file="$local_themes_path/$selected_theme/Config.json"
 
 # Check if the JSON file exists
 if [[ ! -f "$json_file" ]]; then
