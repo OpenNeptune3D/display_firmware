@@ -11,6 +11,10 @@
     {
       "source": "Modified_Scripts/openneptune_display.py",
       "destination": "display_connector/src/openneptune_display.py"
+    },
+    {
+      "source": "Modified_Scripts/config.py",
+      "destination": "display_connector/src/config.py"
     }
   ]
 }
