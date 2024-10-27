@@ -56,17 +56,17 @@ class ConfigHandler(ConfigParser):
             self.set("files", "sort_order", "desc")
             self.set("files", "sort_folders_first", "true")
 
-            #self.add_section("main_screen")
-            #self.set(
-            #    "main_screen",
-            #    "; set to MODEL_NAME for built in model name. Remove to use Elegoo model images.",
-            #)
-            #self.set("main_screen", "display_name", "MODEL_NAME")
-            #self.set(
-            #    "main_screen",
-            #    "; color for the line below the model name. As RGB565 value.",
-            #)
-            #self.set("main_screen", "display_name_line_color", "1725")
+            self.add_section("main_screen")
+            self.set(
+                "main_screen",
+                "; set to MODEL_NAME for built in model name. Remove to use Elegoo model images.",
+            )
+            self.set("main_screen", "display_name", "MODEL_NAME")
+            self.set(
+                "main_screen",
+                "; color for the line below the model name. As RGB565 value.",
+            )
+            self.set("main_screen", "display_name_line_color", "1725")
 
             self.add_section("print_screen")
             self.set("print_screen", "z_display", "mm")
