@@ -7,6 +7,10 @@
     {
       "source": "Modified_Scripts/display.py",
       "destination": "display_connector/src/display.py"
+    },
+    {
+      "source": "Modified_Scripts/openneptune_display.py",
+      "destination": "display_connector/src/openneptune_display.py"
     }
   ]
 }
