@@ -28,7 +28,7 @@ if [ "$current_branch" = "main" ]; then
     fi
     
 fi
-
+git config --global init.defaultBranch main
 # Create and activate a Python virtual environment
 #venv
 echo " "
@@ -93,7 +93,7 @@ echo "Theme $selected_theme has been successfully downloaded into the themes dir
 #Modify scripts
 echo "Making necessary modifications"
 # Path to the JSON file
-json_file="$themes_path/$selected_theme/Config.json"
+json_file="/$themes_path/$selected_theme/Config.json"
 
 # Check if the JSON file exists
 if [[ ! -f "$json_file" ]]; then
