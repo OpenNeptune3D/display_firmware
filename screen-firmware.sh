@@ -111,7 +111,7 @@ for script in $(jq -c '.scripts[]' "$json_file"); do
     destination_file=$(echo "$script" | jq -r '.destination')
 
     # Full path to the source file
-    full_source_path="$themes_path/$selected_theme/$source_file"
+    full_source_path="$local_themes_path/$selected_theme/$source_file"
     # Full path to the destination file
     full_destination_path="${HOME}/$destination_file"
 
@@ -131,7 +131,7 @@ fi
 echo " "
 echo "Starting to flash!"
 echo " "
-python3 "${HOME}/display_firmware/Nexus.py" -i "${HOME}/$themes_path/$selected_theme/tft/OpenNeptuneUi.tft" -u 115200 -p /dev/ttyS1
+python3 "${HOME}/display_firmware/Nexus.py" -i "${HOME}/$local_themes_path/$selected_theme/tft/OpenNeptuneUi.tft" -u 115200 -p /dev/ttyS1
 echo " "
 #done
 echo " "
