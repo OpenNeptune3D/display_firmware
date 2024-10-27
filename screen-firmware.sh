@@ -40,7 +40,7 @@ echo " "
 echo "Activated virtual environment successfully"
 #Themes
 main_repo_url="https://github.com/Choccy-vr/display_firmware_dev.git"
-themes_path="Themes"
+themes_path="/display_firmware_dev/Themes"
 
 # Step 1: Fetch the list of themes using the GitHub API
 echo "Fetching the list of available themes..."
