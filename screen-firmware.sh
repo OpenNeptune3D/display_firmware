@@ -131,7 +131,7 @@ fi
 echo " "
 echo "Starting to flash!"
 echo " "
-python3 "${HOME}/display_firmware/Nexus.py" -i "${HOME}/$local_themes_path/$selected_theme/tft/OpenNeptuneUi.tft" -u 115200 -p /dev/ttyS1
+python3 "${HOME}/display_firmware/Nexus.py" -i "$local_themes_path/$selected_theme/tft/OpenNeptuneUi.tft" -u 115200 -p /dev/ttyS1
 echo " "
 #done
 echo " "
