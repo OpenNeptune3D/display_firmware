@@ -300,7 +300,10 @@ install_feature() {
             else
                 echo "Display_Firmware not installed. Downloading"
                 mkdir display_firmware
-                git clone https://github.com/OpenNeptune3D/display_firmware.git "${HOME}/display_firmware"
+                git clone --filter=blob:none --sparse https://github.com/OpenNeptune3D/display_firmware.git "${HOME}/display_firmware"
+                cd "${HOME}/display_firmware"
+                git sparse-checkout init --cone
+                git sparse-checkout set ':!Themes' ':!Updated_Scripts' ':!dev-resourses'
             fi
         fi
 
