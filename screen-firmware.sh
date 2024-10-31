@@ -39,13 +39,13 @@ pip install pyserial
 echo " "
 echo "Activated virtual environment successfully"
 #Themes
-main_repo_url="https://github.com/Choccy-vr/display_firmware_dev.git"
+main_repo_url="https://github.com/Choccy-vr/display_firmware.git"
 themes_path="Themes"
-local_themes_path="${HOME}/display_firmware_dev/$themes_path"
+local_themes_path="${HOME}/display_firmware/$themes_path"
 
 # Step 1: Fetch the list of themes using the GitHub API
 echo "Fetching the list of available themes..."
-themes_list=$(curl -s "https://api.github.com/repos/Choccy-vr/display_firmware_dev/contents/$themes_path" | jq -r '.[] | select(.type == "dir") | .name')
+themes_list=$(curl -s "https://api.github.com/repos/Choccy-vr/display_firmware/contents/$themes_path" | jq -r '.[] | select(.type == "dir") | .name')
 
 if [[ -z "$themes_list" ]]; then
     echo "No themes found in the repository."
