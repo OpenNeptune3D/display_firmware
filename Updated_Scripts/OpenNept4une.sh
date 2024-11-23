@@ -300,7 +300,10 @@ install_feature() {
             else
                 echo "Display_Firmware not installed. Downloading"
                 mkdir display_firmware
-                git clone https://github.com/OpenNeptune3D/display_firmware.git "${HOME}/display_firmware"
+                git clone --filter=blob:none --sparse https://github.com/OpenNeptune3D/display_firmware.git "${HOME}/display_firmware"
+                cd "${HOME}/display_firmware"
+                git sparse-checkout init --cone
+                git sparse-checkout set ':!Themes' ':!Updated_Scripts' ':!dev-resourses'
             fi
         fi
 
@@ -329,16 +332,12 @@ android_rules() {
     install_feature "Android ADB Rules" "$ANDROID_RULE_INSTALLER" "Do you want to install the android ADB rules? (may fix klipperscreen issues)"
 }
 
-webcam_setup() {
-    install_feature "Webcam Setup" "$WEBCAM_SETUP_INSTALLER" "Do you want to configure mjpg-streamer?"
-}
-
 display_firmware() {
     install_feature "Updated Display Firmware" "$UPDATED_DISPLAY_FIRMWARE_INSTALLER" "Do you want to install the updated display firmware? (customizes ui & adds some functionality)"
 }
 
-crowsnest_fix() {
-    install_feature "Crowsnest FPS Fix" "$CROWSNEST_FIX_INSTALLER" "Do you want to install the crowsnest fps fix?"
+webcam_setup() {
+    install_feature "Webcam Setup" "$WEBCAM_SETUP_INSTALLER" "Do you want to configure mjpg-streamer?"
 }
 
 base_image_config() {
@@ -706,7 +705,7 @@ install_screen_service() {
 }
 
 run_install_screen_service_with_setup() {
-    initialize_display_connector && eval "$DISPLAY_SERVICE_INSTALLER"
+    rm -rf ${HOME}/display_connector && initialize_display_connector && eval "$DISPLAY_SERVICE_INSTALLER"
 }
 
 initialize_display_connector() {
@@ -788,7 +787,7 @@ print_menu() {
     echo ""
     echo -e "(${R} Q ${NC}) Quit"
     echo "=========================================================="
-    echo "Select an option by entering (1-7 / q):"
+    echo "Select an option by entering (1-6 / q):"
 }
 
 # Parse Command-Line Arguments
