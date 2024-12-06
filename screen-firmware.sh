@@ -33,8 +33,8 @@ git config --global init.defaultBranch main
 #venv
 echo " "
 echo "Creating and activating a virtual environment..."
-python3 -m venv Display-Update
-source Display-Update/bin/activate
+python3 -m venv "${HOME}/display_firmware/venv"
+source "${HOME}/display_firmware/venv/bin/activate"
 pip install pyserial
 echo " "
 echo "Activated virtual environment successfully"
