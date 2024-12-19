@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Prompt the user for confirmation
-read -p "Do you want to update the display firmware? Display_firmware is still very early in devolpment! Some things may not function as intended. (Y/N): " confirm
+read -p "Are you sure you want to update the display firmware? Display_firmware is still very early in devolpment! Some things may not function as intended. (Y/N): " confirm
 
 # Convert the input to uppercase
 confirm=$(echo "$confirm" | tr '[:lower:]' '[:upper:]')
@@ -13,6 +13,7 @@ if [ "$confirm" = "Y" ]; then
     echo "Updating display firmware"
     echo " "
     echo "DO NOT power off the machine! This may take a while."
+    echo " "
     #update screen firmware
 
     #stopping display service
