@@ -83,20 +83,13 @@ fi
 
 # Prompt user to select a theme
 echo "Fetching available themes..."
-MAIN_REPO_URL="https://github.com/OpenNeptune3D/display_firmware.git"
 THEMES_PATH="Themes"
 LOCAL_PATH="${HOME}/display_firmware"
 
-# Reinitialize repository
-if [[ ! -d "$LOCAL_PATH/.git" ]]; then
-    git -C "$LOCAL_PATH" init
-    git -C "$LOCAL_PATH" remote add origin "$MAIN_REPO_URL"
+# Verify Themes folder exists
+if [[ ! -d "$LOCAL_PATH/Themes" ]]; then
+    error_exit "Themes folder not found after sparse checkout."
 fi
-
-# Configure sparse checkout to fetch only the Themes folder's contents
-git -C "$LOCAL_PATH" config core.sparseCheckout true
-echo "$THEMES_PATH/" > "$LOCAL_PATH/.git/info/sparse-checkout"
-git -C "$LOCAL_PATH" pull origin $(git -C "${HOME}/OpenNept4une" symbolic-ref --short HEAD 2>/dev/null) || error_exit "Failed to fetch themes directory."
 
 # Parse themes directory to list options
 themes_list=$(find "$LOCAL_PATH/$THEMES_PATH" -mindepth 1 -maxdepth 1 -type d -exec basename {} \;)
