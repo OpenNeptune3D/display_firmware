@@ -38,6 +38,13 @@ else
 fi
 
 if [[ "$firmware_choice" == "2" ]]; then
+    # Remove the specific entry from display_connector.cfg if present
+    config_file="${HOME}/printer_data/config/display_connector.cfg"
+    if grep -q "display_type = openneptune" "$config_file"; then
+        sed -i "/display_type = openneptune/d" "$config_file"
+        echo "Removed 'display_type = openneptune' from display_connector.cfg."
+    fi
+
     # Flash the Elegoo firmware
     tft_file="${HOME}/display_connector/dev-resources/UI_1.2.14_240705.tft"
 
