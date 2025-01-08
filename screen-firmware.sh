@@ -85,25 +85,21 @@ fi
 echo "Fetching available themes..."
 MAIN_REPO_URL="https://github.com/OpenNeptune3D/display_firmware.git"
 THEMES_PATH="Themes"
-LOCAL_THEMES_PATH="${HOME}/display_firmware/$THEMES_PATH"
-
-# Clean up any previous directories
-rm -rf "$LOCAL_THEMES_PATH"
-mkdir -p "$LOCAL_THEMES_PATH"
+LOCAL_PATH="${HOME}/display_firmware"
 
 # Reinitialize repository
-if [[ ! -d "$LOCAL_THEMES_PATH/.git" ]]; then
-    git -C "$LOCAL_THEMES_PATH" init
-    git -C "$LOCAL_THEMES_PATH" remote add origin "$MAIN_REPO_URL"
+if [[ ! -d "$LOCAL_PATH/.git" ]]; then
+    git -C "$LOCAL_PATH" init
+    git -C "$LOCAL_PATH" remote add origin "$MAIN_REPO_URL"
 fi
 
 # Configure sparse checkout to fetch only the Themes folder's contents
-git -C "$LOCAL_THEMES_PATH" config core.sparseCheckout true
-echo "$THEMES_PATH/" > "$LOCAL_THEMES_PATH/.git/info/sparse-checkout"
-git -C "$LOCAL_THEMES_PATH" pull origin dev || error_exit "Failed to fetch themes directory."
+git -C "$LOCAL_PATH" config core.sparseCheckout true
+echo "$THEMES_PATH/" > "$LOCAL_PATH/.git/info/sparse-checkout"
+git -C "$LOCAL_PATH" pull origin $(git -C "${HOME}/OpenNept4une" symbolic-ref --short HEAD 2>/dev/null) || error_exit "Failed to fetch themes directory."
 
 # Parse themes directory to list options
-themes_list=$(find "$LOCAL_THEMES_PATH/$THEMES_PATH" -mindepth 1 -maxdepth 1 -type d -exec basename {} \;)
+themes_list=$(find "$LOCAL_PATH/$THEMES_PATH" -mindepth 1 -maxdepth 1 -type d -exec basename {} \;)
 if [[ -z "$themes_list" ]]; then
     error_exit "No themes found in the repository."
 fi
@@ -127,7 +123,7 @@ selected_theme="${theme_array[$selection-1]}"
 echo "Selected theme: $selected_theme"
 
 # Dynamically handle directory structure
-theme_dir="$LOCAL_THEMES_PATH/$THEMES_PATH/$selected_theme"
+theme_dir="$LOCAL_PATH/$THEMES_PATH/$selected_theme"
 if [[ ! -d "$theme_dir" ]]; then
     error_exit "Theme directory not found for $selected_theme."
 fi
@@ -139,7 +135,7 @@ tft_file="$theme_dir/tft/OpenNeptuneUi.tft"
 if [[ ! -f "$json_file" ]]; then
     echo "[ERROR] Config.json not found in expected path."
     echo "Debugging directory structure:"
-    ls -R "$LOCAL_THEMES_PATH/$THEMES_PATH"
+    ls -R "$LOCAL_PATH/$THEMES_PATH"
     exit 1
 fi
 echo "Config.json successfully fetched."
