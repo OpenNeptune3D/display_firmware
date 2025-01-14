@@ -125,30 +125,30 @@ json_file="$theme_dir/Config.json"
 tft_file="$theme_dir/tft/OpenNeptuneUi.tft"
 
 # Debug directory structure if Config.json not found
-if [[ ! -f "$json_file" ]]; then
-    echo "[ERROR] Config.json not found in expected path."
-    echo "Debugging directory structure:"
-    ls -R "$LOCAL_PATH/$THEMES_PATH"
-    exit 1
-fi
-echo "Config.json successfully fetched."
+#if [[ ! -f "$json_file" ]]; then
+#    echo "[ERROR] Config.json not found in expected path."
+#    echo "Debugging directory structure:"
+#    ls -R "$LOCAL_PATH/$THEMES_PATH"
+#    exit 1
+#fi
+#echo "Config.json successfully fetched."
 
 # Process scripts in Config.json
-echo "Processing scripts from $json_file..."
-jq -c '.scripts[]' "$json_file" | while read -r script; do
-    source_file=$(echo "$script" | jq -r '.source')
-    destination_file=$(echo "$script" | jq -r '.destination')
+#echo "Processing scripts from $json_file..."
+#jq -c '.scripts[]' "$json_file" | while read -r script; do
+#    source_file=$(echo "$script" | jq -r '.source')
+#    destination_file=$(echo "$script" | jq -r '.destination')
 
-    full_source_path="$theme_dir/$source_file"
-    full_destination_path="${HOME}/$destination_file"
+#    full_source_path="$theme_dir/$source_file"
+#    full_destination_path="${HOME}/$destination_file"
 
-    if [[ -f "$full_source_path" ]]; then
-        cp -f "$full_source_path" "$full_destination_path"
-        echo "Copied $full_source_path to $full_destination_path"
-    else
-        echo "[WARNING] Source file not found: $full_source_path"
-    fi
-done
+#    if [[ -f "$full_source_path" ]]; then
+#        cp -f "$full_source_path" "$full_destination_path"
+#        echo "Copied $full_source_path to $full_destination_path"
+#    else
+#        echo "[WARNING] Source file not found: $full_source_path"
+#    fi
+#done
 
 # Update display_connector.cfg
 config_file="${HOME}/printer_data/config/display_connector.cfg"
