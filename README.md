@@ -1,8 +1,4 @@
-### Help Display_firmware
-
-I do not have the time to work on this project anymore. I know this project can be something great if it gets the attention it deserves. The base is there go wild make your own custom UI Themes help out with the base code. I have made a few bits of documentation if you need any help fell free to dm me on discord @ginobeano I will try to help the best I can. Thank you!
-
-# Display_firmware
+# Display Firmware
 
 Custom Firmware for 4.3" TJC displays as provided with Elegoo Neptune printers
 
@@ -12,14 +8,14 @@ UI skins can be used to fully customize the UI, but this doesn't extend to just 
 
 ## Instalation
 
-- To install display_firmware run 
+- To install display_firmware, run 
 
 ```
 opennept4une
 ```
 
-- then navigate to Advanced Options and Display_Firmware(Alpha)
+- Choose ` 7) Advanced Options Menu `
 
-(Those are not the exact names of the pages find the option closest to it)
+- Choose ` 5) Flash/Update Display Firmware (Alpha) `
 
-- follow the instalation instructions and you are done!
+- Follow the on-screen instructions, and you are done!
