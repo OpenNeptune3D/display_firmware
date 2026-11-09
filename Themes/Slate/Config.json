@@ -5,12 +5,12 @@
       "destination": "display_connector/src/response_actions.py"
     },
     {
-      "source": "Modified_Scripts/display.py",
-      "destination": "display_connector/src/display.py"
-    },
-    {
       "source": "Modified_Scripts/openneptune_display.py",
       "destination": "display_connector/src/openneptune_display.py"
+    },
+    {
+      "source": "Modified_Scripts/neptune4.py",
+      "destination": "display_connector/src/neptune4.py"
     },
     {
       "source": "Modified_Scripts/config.py",

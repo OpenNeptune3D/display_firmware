@@ -21,6 +21,15 @@ from src.mapping import (
     PAGE_SHUTDOWN_DIALOG,
 )
 
+# Extra touches sent only by the OpenNeptune (Slate) firmware, checked before response_actions
+openneptune_response_actions = {
+    # Main: "Temp" and the nozzle/bed tiles send 5, the light tile sends 6
+    1: {
+        5: "page " + PAGE_PREPARE_TEMP,
+        6: "page " + PAGE_LIGHTS,
+    },
+}
+
 response_actions = {
     # Main
     1: {
@@ -28,8 +37,6 @@ response_actions = {
         2: "page " + PAGE_PREPARE_MOVE,
         3: "page " + PAGE_SETTINGS,
         4: "page " + PAGE_LEVELING,
-        5: "page " + PAGE_PREPARE_TEMP,
-        6: "page " + PAGE_LIGHTS,
     },
     # File Picker
     2: {
@@ -40,7 +47,6 @@ response_actions = {
         9: "open_file_2",
         10: "open_file_3",
         11: "open_file_4",
-        12: "open_file_5",
     },
     # Level Picker
     3: {
@@ -97,6 +103,28 @@ response_actions = {
         8: "page " + PAGE_SETTINGS_ABOUT,
         9: "page " + PAGE_SETTINGS_ADVANCED,
     },
+    # Settings on set_4_max, used for every model since it has a WLAN row (#17)
+    126: {
+        1: "page " + PAGE_SETTINGS_LANGUAGE,
+        2: "wifi_open",
+        3: "page " + PAGE_LIGHTS,
+        4: "toggle_fan",
+        5: "printer.send_gcode('M84')",
+        6: "toggle_filament_sensor",
+        # The stock "Factory Settings" row, relabelled since set_4_max has no
+        # Temperature Settings row of its own
+        7: "page " + PAGE_SETTINGS_TEMPERATURE,
+        8: "page " + PAGE_SETTINGS_ABOUT,
+        9: "page " + PAGE_SETTINGS_ADVANCED,
+    },
+    # WiFi network list (component 0 is the back arrow)
+    131: {
+        **{row + 1: f"wifi_select_{row}" for row in range(8)},
+        9: "wifi_refresh",
+        10: "wifi_page_prev",
+        11: "wifi_page_next",
+        12: "wifi_toggle",
+    },
     # Confirm Print
     18: {0: "print_opened_file", 1: "go_back"},
     # Printing
@@ -129,6 +157,8 @@ response_actions = {
         7: "temp_adjust_+",
         8: "temp_reset",
         9: "temp_heater_heater_bed_outer",
+        10: "extrude_+",
+        11: "extrude_-",
         12: "page " + PAGE_PRINTING_SPEED,
         13: "page " + PAGE_PRINTING_ADJUST,
     },
@@ -142,6 +172,8 @@ response_actions = {
         6: "temp_adjust_-",
         7: "temp_adjust_+",
         8: "temp_reset",
+        10: "extrude_+",
+        11: "extrude_-",
         12: "page " + PAGE_PRINTING_SPEED,
         13: "page " + PAGE_PRINTING_ADJUST,
     },
@@ -186,7 +218,7 @@ response_actions = {
         8: "page " + PAGE_PREPARE_EXTRUDER,
     },
     # Confirm Emergency Stop
-    106: {0: "emergency_stop", 1: "go_back"},
+    108: {0: "emergency_stop", 1: "go_back"},
     # Printing Adjust
     127: {
         1: "zoffsetchange_0.01",
@@ -223,6 +255,12 @@ response_actions = {
         6: "zprobe_-",
         7: "save_zprobe",
     },
+}
+
+# Text typed on a keyboard page, sent when its OK button is pressed
+text_input_actions = {
+    # keybdA, the WiFi password keyboard
+    132: {1: "wifi_password"},
 }
 
 input_actions = {
@@ -264,4 +302,17 @@ custom_touch_actions = {
         (24, 320, 248, 370): "go_back",           # Back button
     },
     "printing_kamp": {(40, 400, 230, 450): "save_config"},
+}
+
+# Tabs whose button in the stock Elegoo firmware sends no touch event (and so neither
+# navigates nor beeps). Bottom tab bar: y 425-480, Move 0-90, Temp 90-181, Extrude 181-272.
+# The host navigates on the coordinate touch instead, but only if no component event did it
+# first, so firmware versions where the tab still works don't navigate or beep twice.
+fallback_tab_touch_actions = {
+    PAGE_PREPARE_TEMP: {
+        (181, 425, 272, 480): PAGE_PREPARE_EXTRUDER,
+    },
+    PAGE_PREPARE_EXTRUDER: {
+        (90, 425, 181, 480): PAGE_PREPARE_TEMP,
+    },
 }
