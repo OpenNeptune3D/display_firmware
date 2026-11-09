@@ -1,7 +1,13 @@
 Resources for creating your own theme.
 
-The HMI file is only editable in the TJC Editor. Note this is only avaliable in chinese.
+The HMI file is only editable in the TJC USART HMI Editor. 
 
-But there is this great repo that adds English. https://github.com/audiobrian/usart_hmi_english_translation 
+Note: patch USART HMI install with contents of "USART_HMI_EN_Patch_v1_68_2.zip" to change USART HMI from Chinese to English.
 
-You can find the editor here http://wiki.tjc1688.com/download/usart_hmi.html
+Copy (and Replace) all USART_HMI_EN_Patch_v1_68_2.zip's extracted file contents to;
+"C:\Program Files (x86)\USART HMI"
+
+You can find the editor here http://filedown.tjc1688.com/USARTHMI/oldapp/USARTHMIsetup_1.68.2.zip
+
+Alternatively this repo adds English to the slightly older v1.67.5 https://github.com/audiobrian/usart_hmi_english_translation 
+
